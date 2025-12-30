@@ -47,6 +47,10 @@ def parse_winner(info: Dict[str, Any]) -> Optional[str]:
     return str(winner)
 
 
+def count_active_players(players: list[Dict[str, Any]]) -> int:
+    return sum("stats" in player for player in players)
+
+
 def build_embed(
     data: Dict[str, Any], game_id: str, thumbnail_name: Optional[str]
 ) -> discord.Embed:
@@ -75,7 +79,7 @@ def build_embed(
     embed.add_field(name="Winner", value=winner or "N/A", inline=True)
     embed.add_field(
         name="Players",
-        value=f"{len(players)}/{config.get('maxPlayers', 'N/A')}",
+        value=f"{count_active_players(players)}/{config.get('maxPlayers', 'N/A')}",
         inline=True,
     )
     embed.add_field(name="Bots", value=str(config.get("bots", "N/A")), inline=True)
