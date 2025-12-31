@@ -2,8 +2,10 @@ import os
 from typing import Any
 
 import discord
+from discord import app_commands
 from dotenv import load_dotenv
 
+from game.cmd import game_command
 from game.controller import GameController
 
 
@@ -11,9 +13,12 @@ class OpenFrontBot(discord.Client):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.controller = GameController()
+        self.tree = app_commands.CommandTree(self)
 
     async def setup_hook(self) -> None:
         await self.controller.setup()
+        self.tree.add_command(game_command)
+        await self.tree.sync()
 
     async def close(self) -> None:
         await self.controller.close()
