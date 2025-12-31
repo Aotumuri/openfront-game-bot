@@ -6,6 +6,7 @@ from discord import app_commands
 from dotenv import load_dotenv
 
 from game.cmd import game_command
+from player.cmd import player_command
 from game.controller import GameController
 
 
@@ -18,6 +19,7 @@ class OpenFrontBot(discord.Client):
     async def setup_hook(self) -> None:
         await self.controller.setup()
         self.tree.add_command(game_command)
+        self.tree.add_command(player_command)
         await self.tree.sync()
 
     async def close(self) -> None:
