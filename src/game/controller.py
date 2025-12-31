@@ -5,7 +5,7 @@ import aiohttp
 import discord
 
 from game.embeds import build_embed
-from game.game_api import fetch_game
+from game.api import fetch_game
 from game.message_parser import extract_game_ids, should_ignore_message
 from game.replay_view import build_view
 from shared.maps import get_thumbnail_file
