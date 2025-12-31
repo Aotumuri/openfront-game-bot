@@ -13,12 +13,16 @@ Slash commands:
 - `/game` fetches a game summary.
 - `/player` fetches a player summary.
 
+Rank images require `rsvg-convert` on your PATH.
+Install on macOS: `brew install librsvg`
+
 Create a `.env` file with your bot token and API URL:
 
 ```sh
 DISCORD_TOKEN=your-token-here
 OPENFRONT_GAME_API_URL=https://api.openfront.io/game/{game_id}
 OPENFRONT_PLAYER_API_URL=https://api.openfront.io/player/{player_id}
+OPENFRONT_RANK_THRESHOLDS=E:0,D:100,C:200,B:400,A:700,S:1000
 OPENFRONT_SCORE_WIN_WEIGHT=1.0
 OPENFRONT_SCORE_LOSS_WEIGHT=1.0
 OPENFRONT_SCORE_SINGLE_SCALE=1.0

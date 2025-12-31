@@ -63,7 +63,9 @@ def sum_public_results(stats: Dict[str, Any], mode: str) -> str:
     return f"{wins}W / {losses}L ({win_rate:.1f}%)"
 
 
-def build_player_embed(data: Dict[str, Any], player_id: str, score: float) -> discord.Embed:
+def build_player_embed(
+    data: Dict[str, Any], player_id: str, score: float
+) -> discord.Embed:
     games = data.get("games", [])
     created_at = data.get("createdAt", "")
     stats = data.get("stats", {})
@@ -80,5 +82,6 @@ def build_player_embed(data: Dict[str, Any], player_id: str, score: float) -> di
     embed.add_field(name="Public FFA", value=public_ffa, inline=True)
     embed.add_field(name="Public Team", value=public_team, inline=True)
     embed.add_field(name="Recent Games", value=build_recent_games(games), inline=False)
+    embed.set_thumbnail(url="attachment://rank.png")
     embed.set_footer(text="Use the buttons below to view game details.")
     return embed
