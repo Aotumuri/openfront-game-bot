@@ -55,7 +55,7 @@ def build_clan_leaderboard_embed(
         ratio = parse_float(entry.get("weightedWLRatio"))
         ratio_text = f"{ratio:.2f}" if ratio is not None else "N/A"
         line = (
-            f"{index}) [{display_tag}] - WLR {ratio_text} | {wins}W/{losses}L ({games})"
+            f"{index}) [{display_tag}] - weightedWLRatio {ratio_text} | {wins}W/{losses}L ({games})"
         )
         if highlight:
             line = f"**{line}**"
@@ -65,7 +65,7 @@ def build_clan_leaderboard_embed(
     start = format_iso(data.get("start"))
     end = format_iso(data.get("end"))
     label_map = {
-        "weightedWLRatio": "WLR",
+        "weightedWLRatio": "weightedWLRatio",
         "wins": "Wins",
         "games": "Games",
     }

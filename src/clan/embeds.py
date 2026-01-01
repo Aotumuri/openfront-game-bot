@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 import discord
 
-from shared.parsing import parse_int
+from shared.parsing import parse_float, parse_int
 
 
 def build_clan_embed(
@@ -18,8 +18,8 @@ def build_clan_embed(
     sessions = parse_int(clan.get("playerSessions"))
     wins = parse_int(clan.get("wins"))
     losses = parse_int(clan.get("losses"))
-    ratio_value = wins / losses if losses else float(wins) if wins else 0.0
-    ratio_text = f"{ratio_value:.2f}"
+    ratio_value = parse_float(clan.get("weightedWLRatio"))
+    ratio_text = f"{ratio_value:.2f}" if ratio_value is not None else "N/A"
     wlr_label = f"Rank {wlr_rank}" if wlr_rank else "Unranked"
     ratio_text = f"{ratio_text} ({wlr_label})"
 
@@ -37,5 +37,5 @@ def build_clan_embed(
     embed.add_field(name="Wins", value=wins_text, inline=True)
     embed.add_field(name="Losses", value=str(losses), inline=True)
     embed.add_field(name="Player Sessions", value=str(sessions), inline=True)
-    embed.add_field(name="WLR", value=ratio_text, inline=True)
+    embed.add_field(name="weightedWLRatio", value=ratio_text, inline=True)
     return embed
