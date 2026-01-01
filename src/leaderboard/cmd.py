@@ -8,15 +8,21 @@ from shared.session import get_session
 
 
 @app_commands.command(
-    name="leaderboard", description="Show the OpenFront public FFA leaderboard."
+    name="leaderboard", description="Show the OpenFront player leaderboard."
 )
-async def leaderboard_command(interaction: discord.Interaction) -> None:
+async def leaderboard_command(
+    interaction: discord.Interaction,
+) -> None:
     session = await get_session(interaction)
     if not session:
         await interaction.response.send_message("Bot not ready.", ephemeral=True)
         return
 
-    data = await fetch_leaderboard(session)
+    try:
+        data = await fetch_leaderboard(session)
+    except RuntimeError as exc:
+        await interaction.response.send_message(str(exc), ephemeral=True)
+        return
     if not data:
         await interaction.response.send_message(
             "Leaderboard not available.", ephemeral=True
