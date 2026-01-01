@@ -1,21 +1,8 @@
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 import discord
 
-
-def _parse_int(value: Any) -> int:
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return 0
-
-
-def _parse_float(value: Any) -> Optional[float]:
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        return None
-
+from shared.parsing import parse_float, parse_int
 
 def _format_leaderboard_name(entry: Dict[str, Any]) -> str:
     user = entry.get("user")
@@ -43,12 +30,12 @@ def build_leaderboard_embed(
     lines = []
     for index, entry in enumerate(entries[:limit], start=1):
         name = _format_leaderboard_name(entry)
-        wins = _parse_int(entry.get("wins"))
-        losses = _parse_int(entry.get("losses"))
-        total = _parse_int(entry.get("total"))
+        wins = parse_int(entry.get("wins"))
+        losses = parse_int(entry.get("losses"))
+        total = parse_int(entry.get("total"))
         if not total:
             total = wins + losses
-        wlr_value = _parse_float(entry.get("wlr"))
+        wlr_value = parse_float(entry.get("wlr"))
         wlr_text = f"{wlr_value:.2f}" if wlr_value is not None else "N/A"
         lines.append(
             f"{index}. {name} - WLR {wlr_text} | {wins}W/{losses}L ({total})"
