@@ -5,7 +5,9 @@ import discord
 from discord import app_commands
 from dotenv import load_dotenv
 
+from easteregg.chocolate import handle_chocolate_reaction, is_chocolate_reaction
 from game.cmd import game_command
+from info.cmd import info_command
 from leaderboard.cmd import leaderboard_command
 from leaderboard_clan.cmd import leaderboard_clan_command
 from player.cmd import player_command
@@ -24,6 +26,7 @@ class OpenFrontBot(discord.Client):
         self.tree.add_command(leaderboard_clan_command)
         self.tree.add_command(player_command)
         self.tree.add_command(leaderboard_command)
+        self.tree.add_command(info_command)
         await self.tree.sync()
 
     async def close(self) -> None:
@@ -32,6 +35,19 @@ class OpenFrontBot(discord.Client):
 
     async def on_message(self, message: discord.Message) -> None:
         await self.controller.handle_message(message)
+
+    async def on_reaction_add(
+        self, reaction: discord.Reaction, user: discord.User | discord.Member
+    ) -> None:
+        if user.bot:
+            return
+        if not self.user or reaction.message.author.id != self.user.id:
+            return
+
+        if not is_chocolate_reaction(reaction):
+            return
+
+        await handle_chocolate_reaction(reaction, user)
 
 
 def main() -> None:

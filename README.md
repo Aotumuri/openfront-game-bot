@@ -14,6 +14,7 @@ Slash commands:
 - `/player` fetches a player summary.
 - `/leaderboard` shows the public player leaderboard.
 - `/leaderboard_clan` shows the public clan leaderboard. Supports `weighted_wlr`, `wins`, or `games`.
+- `/info` shows bot info (name, author, git link).
 
 Rank images require `rsvg-convert` on your PATH.
 Install on macOS: `brew install librsvg`
@@ -33,6 +34,9 @@ OPENFRONT_SCORE_SINGLE_SCALE=0.4
 OPENFRONT_SCORE_TEAM_SCALE=0.1
 OPENFRONT_SCORE_SINGLE_GAME_BONUS=0.6
 OPENFRONT_SCORE_TEAM_GAME_BONUS=0.2
+OPENFRONT_BOT_NAME=OpenFrontStatus
+OPENFRONT_BOT_AUTHOR=your-name-here
+OPENFRONT_BOT_GIT_URL=https://github.com/your/repo
 ```
 
 The bot listens for links like `https://openfront.io/#join=1xkMyV4S` and queries
