@@ -1,19 +1,9 @@
-import datetime as dt
 from typing import Any, Dict, List
 
 import discord
 
 from player.stats import get_public_wins_losses
-
-
-def format_iso(ts: str) -> str:
-    if not ts:
-        return "N/A"
-    try:
-        parsed = dt.datetime.fromisoformat(ts.replace("Z", "+00:00"))
-    except ValueError:
-        return ts
-    return parsed.strftime("%Y-%m-%d %H:%M:%S UTC")
+from shared.time import format_iso
 
 
 def build_recent_games(games: List[Dict[str, Any]], limit: int = 5) -> str:

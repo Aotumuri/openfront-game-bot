@@ -1,19 +1,9 @@
-import datetime as dt
 from typing import Any, Dict, List, Optional
 
 import discord
 
 from shared.parsing import parse_float, parse_int
-
-
-def _format_iso(ts: Optional[str]) -> str:
-    if not ts:
-        return "N/A"
-    try:
-        parsed = dt.datetime.fromisoformat(ts.replace("Z", "+00:00"))
-    except ValueError:
-        return ts
-    return parsed.strftime("%Y-%m-%d %H:%M:%S UTC")
+from shared.time import format_iso
 
 
 def _sort_key(entry: Dict[str, Any], metric: str) -> float:
@@ -72,8 +62,8 @@ def build_clan_leaderboard_embed(
         lines.append(line)
 
     embed.description = "\n".join(lines)
-    start = _format_iso(data.get("start"))
-    end = _format_iso(data.get("end"))
+    start = format_iso(data.get("start"))
+    end = format_iso(data.get("end"))
     label_map = {
         "weightedWLRatio": "WLR",
         "wins": "Wins",
