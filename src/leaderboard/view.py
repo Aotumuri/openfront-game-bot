@@ -2,7 +2,7 @@ from typing import Iterable, List, Optional
 
 import discord
 
-from player.cmd import build_player_payload
+from player.service import build_player_payload
 from shared.session import get_session
 
 

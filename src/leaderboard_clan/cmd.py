@@ -2,7 +2,7 @@ from typing import Optional
 
 import discord
 from discord import app_commands
-from leaderboard_clan.api import fetch_clan_leaderboard_payload
+from leaderboard_clan.service import fetch_clan_leaderboard_payload
 from leaderboard_clan.embeds import (
     build_clan_leaderboard_embed,
     build_clan_leaderboard_embed_for_tag,

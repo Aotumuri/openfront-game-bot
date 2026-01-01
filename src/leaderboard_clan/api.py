@@ -26,15 +26,3 @@ async def fetch_clan_leaderboard(
     if not isinstance(payload, dict):
         return None
     return payload
-
-
-async def fetch_clan_leaderboard_payload(
-    session: aiohttp.ClientSession,
-) -> tuple[Optional[Dict[str, Any]], Optional[str]]:
-    try:
-        data = await fetch_clan_leaderboard(session)
-    except RuntimeError as exc:
-        return None, str(exc)
-    if not data:
-        return None, "Leaderboard not available."
-    return data, None

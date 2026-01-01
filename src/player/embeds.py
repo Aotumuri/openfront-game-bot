@@ -3,7 +3,8 @@ from typing import Any, Dict, List
 
 import discord
 
-from shared.parsing import parse_int
+from player.stats import get_public_wins_losses
+
 
 def format_iso(ts: str) -> str:
     if not ts:
@@ -30,22 +31,6 @@ def build_recent_games(games: List[Dict[str, Any]], limit: int = 5) -> str:
             f"{index}. {start} | {mode} | {game_type} | {game_map} | {difficulty} | {game_id}"
         )
     return "\n".join(lines)
-
-
-def get_public_wins_losses(stats: Dict[str, Any], mode: str) -> tuple[int, int]:
-    public_stats = stats.get("Public", {})
-    mode_stats = public_stats.get(mode, {})
-    if not isinstance(mode_stats, dict) or not mode_stats:
-        return 0, 0
-
-    wins = 0
-    losses = 0
-    for difficulty in mode_stats.values():
-        if not isinstance(difficulty, dict):
-            continue
-        wins += parse_int(difficulty.get("wins"))
-        losses += parse_int(difficulty.get("losses"))
-    return wins, losses
 
 
 def sum_public_results(stats: Dict[str, Any], mode: str) -> str:

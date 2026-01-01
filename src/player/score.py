@@ -1,7 +1,7 @@
 import os
 from typing import Any, Dict
 
-from player.embeds import get_public_wins_losses
+from player.stats import get_public_wins_losses
 
 
 def _get_score_weights() -> tuple[float, float, float, float, float, float]:

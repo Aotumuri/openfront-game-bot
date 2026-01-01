@@ -4,11 +4,8 @@ from typing import Optional, Tuple
 import aiohttp
 import discord
 
-from game.embeds import build_embed
-from game.api import fetch_game
+from game.service import build_game_payload
 from game.message_parser import extract_game_ids, should_ignore_message
-from game.replay_view import build_view
-from shared.maps import get_thumbnail_file
 
 
 class GameController:
@@ -34,16 +31,7 @@ class GameController:
         if not self.http_session:
             return None
 
-        data = await fetch_game(self.http_session, game_id)
-        if not data:
-            return None
-
-        map_name = data.get("info", {}).get("config", {}).get("gameMap", "")
-        thumbnail_file = get_thumbnail_file(map_name)
-        thumbnail_name = thumbnail_file.filename if thumbnail_file else None
-        embed = build_embed(data, game_id, thumbnail_name)
-        view = build_view(game_id)
-        return embed, view, thumbnail_file
+        return await build_game_payload(self.http_session, game_id)
 
     async def handle_message(self, message: discord.Message) -> None:
         if should_ignore_message(message):
