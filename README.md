@@ -2,22 +2,25 @@
 
 Discord bot that detects OpenFront join links and posts a game summary embed.
 
-## Usage
+## Setup
+
+Install `uv` (Python package manager). Details: https://github.com/astral-sh/uv
+
+Requires Python 3.11+ (managed by `uv`).
+
+```sh
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+Then install dependencies:
 
 ```sh
 uv sync
-uv run python src/bot.py
 ```
-
-Slash commands:
-- `/game` fetches a game summary.
-- `/player` fetches a player summary.
-- `/leaderboard` shows the public player leaderboard.
-- `/leaderboard_clan` shows the public clan leaderboard. Supports `weighted_wlr`, `wins`, or `games`.
-- `/info` shows bot info (name, author, git link).
-- `/clan` fetches a clan summary.
-
-Rank images are rendered via `Pillow`.
 
 Create a `.env` file with the required token and API URLs:
 
@@ -40,6 +43,22 @@ OPENFRONT_BOT_AUTHOR=your-name-here
 OPENFRONT_BOT_GIT_URL=https://github.com/your/repo
 OPENFRONT_BOT_CONTRIBUTORS=User1,User2
 ```
+
+## Usage
+
+```sh
+uv run python src/bot.py
+```
+
+Slash commands:
+- `/game` fetches a game summary.
+- `/player` fetches a player summary.
+- `/leaderboard` shows the public player leaderboard.
+- `/leaderboard_clan` shows the public clan leaderboard. Supports `weighted_wlr`, `wins`, or `games`.
+- `/info` shows bot info (name, author, git link).
+- `/clan` fetches a clan summary.
+
+Rank images are rendered via `Pillow`.
 
 The bot listens for links like `https://openfront.io/#join=1xkMyV4S` and queries
 `OPENFRONT_GAME_API_URL` must include `{game_id}` (full endpoint template).
