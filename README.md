@@ -17,8 +17,7 @@ Slash commands:
 - `/info` shows bot info (name, author, git link).
 - `/clan` fetches a clan summary.
 
-Rank images require `rsvg-convert` on your PATH.
-Install on macOS: `brew install librsvg`
+Rank images are rendered via `Pillow`.
 
 Create a `.env` file with the required token and API URLs:
 

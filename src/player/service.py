@@ -5,7 +5,7 @@ import discord
 from player.api import fetch_player
 from player.embeds import build_player_embed
 from player.rank.file import build_rank_file
-from player.rank.rank_svg import parse_rank_thresholds
+from player.rank.progress import parse_rank_thresholds
 from player.score import calculate_score
 from player.views import build_recent_games_view
 
