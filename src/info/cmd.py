@@ -11,4 +11,8 @@ async def info_command(interaction: discord.Interaction) -> None:
         await interaction.response.send_message(error, ephemeral=True)
         return
 
-    await interaction.response.send_message(embed=embed, ephemeral=True)
+    await interaction.response.send_message(
+        embed=embed,
+        ephemeral=True,
+        allowed_mentions=discord.AllowedMentions.none(),
+    )

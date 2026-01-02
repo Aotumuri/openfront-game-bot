@@ -20,3 +20,10 @@ def get_git_url() -> str:
     if not url:
         raise RuntimeError("OPENFRONT_BOT_GIT_URL is not set")
     return url
+
+
+def get_contributors() -> list[str]:
+    raw = os.getenv("OPENFRONT_BOT_CONTRIBUTORS")
+    if not raw:
+        return []
+    return [item.strip() for item in raw.split(",") if item.strip()]
