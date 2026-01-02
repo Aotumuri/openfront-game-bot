@@ -39,6 +39,7 @@ OPENFRONT_SCORE_TEAM_GAME_BONUS=0.2
 OPENFRONT_BOT_NAME=OpenFrontStatus
 OPENFRONT_BOT_AUTHOR=your-name-here
 OPENFRONT_BOT_GIT_URL=https://github.com/your/repo
+OPENFRONT_BOT_CONTRIBUTORS=User1,User2
 ```
 
 The bot listens for links like `https://openfront.io/#join=1xkMyV4S` and queries
