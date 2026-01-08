@@ -30,6 +30,14 @@ Create a `.env` file based on `.env.example`:
 uv run python src/bot.py
 ```
 
+## Docker
+
+Use Docker Compose:
+
+```sh
+docker compose up --build
+```
+
 Slash commands:
 - `/game` fetches a game summary.
 - `/player` fetches a player summary.
