@@ -66,7 +66,9 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     load_dotenv()
     args = parse_args()
-    os.environ["OPENFRONT_BOT_MODE"] = "dev" if args.dev else "main"
+    mode = "dev" if args.dev else "main"
+    os.environ["OPENFRONT_BOT_MODE"] = mode
+    print(f"Starting OpenFront bot in {mode} mode.")
     token_env = "DISCORD_TOKEN_DEV" if args.dev else "DISCORD_TOKEN"
     token = os.getenv(token_env)
     if not token:
