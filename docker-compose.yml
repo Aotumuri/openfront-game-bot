@@ -3,3 +3,10 @@ services:
     build: .
     env_file:
       - .env
+    command: ["uv", "run", "python", "src/bot.py"]
+  bot-dev:
+    build: .
+    env_file:
+      - .env
+    command: ["uv", "run", "python", "src/bot.py", "--dev"]
+    profiles: ["dev"]

@@ -1,3 +1,4 @@
+import argparse
 import os
 from typing import Any
 
@@ -52,11 +53,24 @@ class OpenFrontBot(discord.Client):
         await handle_chocolate_reaction(reaction, user)
 
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="OpenFront Discord bot")
+    parser.add_argument(
+        "--dev",
+        action="store_true",
+        help="Use the dev bot token from DISCORD_TOKEN_DEV",
+    )
+    return parser.parse_args()
+
+
 def main() -> None:
     load_dotenv()
-    token = os.getenv("DISCORD_TOKEN")
+    args = parse_args()
+    os.environ["OPENFRONT_BOT_MODE"] = "dev" if args.dev else "main"
+    token_env = "DISCORD_TOKEN_DEV" if args.dev else "DISCORD_TOKEN"
+    token = os.getenv(token_env)
     if not token:
-        raise RuntimeError("DISCORD_TOKEN is not set")
+        raise RuntimeError(f"{token_env} is not set")
 
     intents = discord.Intents.default()
     intents.message_content = True

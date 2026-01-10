@@ -30,6 +30,12 @@ Create a `.env` file based on `.env.example`:
 uv run python src/bot.py
 ```
 
+Use the dev token:
+
+```sh
+uv run python src/bot.py --dev
+```
+
 ## Docker
 
 Use Docker Compose:

@@ -1,3 +1,4 @@
+import os
 from typing import Optional, Tuple
 
 import discord
@@ -17,5 +18,6 @@ def build_info_payload() -> Tuple[Optional[discord.Embed], Optional[str]]:
         for item in BOT_CONTRIBUTORS_RAW.split(",")
         if item.strip()
     ]
-    embed = build_info_embed(BOT_NAME, BOT_AUTHOR, BOT_GIT_URL, contributors)
+    is_dev = os.getenv("OPENFRONT_BOT_MODE") == "dev"
+    embed = build_info_embed(BOT_NAME, BOT_AUTHOR, BOT_GIT_URL, contributors, is_dev)
     return embed, None
